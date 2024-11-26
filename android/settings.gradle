@@ -16,16 +16,26 @@ pluginManagement {
         maven { url 'https://developer.huawei.com/repo/' }
     }
 
+    // resolutionStrategy {
+    //     eachPlugin {
+    //         if (it.requested.id.getNamespace() == 'com.huawei.agconnect') {
+    //             println ">> ${it.requested.id.id}"
+    //             if (it.requested.id.id == 'com.huawei.agconnect.agcp') {
+    //                 it.useModule('com.huawei.agconnect:agcp:1.9.1.300')
+    //             }
+    //             println ">> ${it.target}"
+    //         } else {
+    //             println ">  ${it.target}"
+    //         }
+    //     }
+    // }
     resolutionStrategy {
         eachPlugin {
-            if (it.requested.id.getNamespace() == 'com.huawei.agconnect') {
-                println ">> ${it.requested.id.id}"
-                if (it.requested.id.id == 'com.huawei.agconnect.agcp') {
-                    it.useModule('com.huawei.agconnect:agcp:1.9.1.300')
-                }
-                println ">> ${it.target}"
-            } else {
-                println ">  ${it.target}"
+            if (requested.id.id == "com.huawei.agconnect") {
+                //https://flutter.dev/go/flutter-gradle-plugin-apply
+                //https://forums.developer.huawei.com/forumPortal/en/topic/0201148914110187023
+                //https://stackoverflow.com/questions/78339717/huawei-agcp-plugin-cannot-be-applied
+                useModule("com.huawei.agconnect:agcp:1.9.1.303")
             }
         }
     }
@@ -33,10 +43,10 @@ pluginManagement {
 
 plugins {
     id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-    id "com.android.application" version "8.7.2" apply false
-    id "org.jetbrains.kotlin.android" version "1.7.10" apply false
+    id "com.android.application" version "8.1.1" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.0" apply false
 
-    id "com.huawei.agconnect.agcp" version "1.9.1.300" apply false
+    id "com.huawei.agconnect" version "1.9.1.303" apply false
 }
 
 include ":app"

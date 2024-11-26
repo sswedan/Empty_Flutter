@@ -26,7 +26,10 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.example.empty_flutter"
+    if (project.android.hasProperty("namespace")) {
+      namespace = "com.example.empty_flutter"
+    }
+    
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
